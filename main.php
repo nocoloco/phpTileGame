@@ -14,6 +14,11 @@
 
 	atualizaPlayer($vetor_mapa,$vetor_eventos);
 	$player[$_SESSION['y']][$_SESSION['x']]=$_SESSION['player'];
+	// ramdomiza inimigos pelo mapa
+	if($_SESSION['totalEnemy'] > 0){
+		$posEnemys = ramdomEnemy($vetor_mapa,$vetor_eventos,$player);
+	}
+
 ?>
 
 <html>
@@ -40,6 +45,9 @@
 							<?if(isset($player[$y][$x])){
 								$img = '<img src="images/'.$player[$y][$x].'" border="0">';
 							}
+							elseif(isset($posEnemys[$y][$x])){
+								$img = '<img src="images/'.$posEnemys[$y][$x].'" border="0">';
+							}
 							else{
 								$img = '&nbsp;';
 							}?>
@@ -49,13 +57,15 @@
 				</tr>
 			<?}?>
 		</table>
+		<?verificaEnconterPlayer($posEnemys,$player);?>
 		<form action="<?=$_SERVER['PHP_SELF'];?>" method="POST">
 			<table align="center" border="1" height="120">
 				<tr align="center" valign="middle">
 					<td colspan="3" width="220"><input type="submit" name="cima" value="Norte"></td>
 					<td rowspan="3" width="100">
 						Pos Y: <?=$_SESSION['y'];?><br>
-						Pos X: <?=$_SESSION['x'];?>
+						Pos X: <?=$_SESSION['x'];?><br>
+						Enemys: <?=$_SESSION['totalEnemy'];?>
 					</td>
 				</tr>
 				<tr align="center" valign="middle">

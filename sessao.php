@@ -6,5 +6,6 @@
 		$_SESSION['player']='player.png';
 		$_SESSION['y']=7;
 		$_SESSION['x']=12;
+		$_SESSION['totalEnemy']=10;
 	}
 ?>

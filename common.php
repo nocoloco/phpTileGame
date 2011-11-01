@@ -106,4 +106,54 @@
 		return false;
 	}
 
+	function &ramdomEnemy(&$mapa,&$eventos,&$player){
+		$enemys=array();
+		$altura = count($mapa);
+		$largura = count($mapa[0]);
+		$i=0;
+		do{
+			$y = rand(0,$altura);
+			$x = rand(0,$largura);
+			if(!isset($eventos[$y][$x]) and !isset($enemys[$y][$x]) and !isset($player[$y][$x])){
+				$enemys[$y][$x]='char3.gif';
+				$i++;
+			}
+		}while($i<$_SESSION['totalEnemy']);
+		return $enemys;
+	}
+
+	function verificaEnconterPlayer(&$enemys,&$player){
+		if($_SESSION['totalEnemy'] > 0){
+			list($y,$posX) = each($player);
+			list($x) = each($posX);
+			// se tem enemy sobre
+			if(isset($enemys[$y-1][$x])){
+				return fight();
+			}
+			// se tem enemy sob
+			elseif(isset($enemys[$y+1][$x])){
+				return fight();
+			}
+			// se tem enemy esq
+			elseif(isset($enemys[$y][$x-1])){
+				return fight();
+			}
+			// se tem enemy dir
+			elseif(isset($enemys[$y][$x+1])){
+				return fight();
+			}
+		}
+		return false;
+	}
+
+	function fight(){
+		$num = rand(0,10);
+		if($num > 2){
+			$_SESSION['totalEnemy'] -= 1;
+			return true;
+		}
+		return false;
+	}
+
+
 ?>
