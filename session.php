@@ -1,3 +1,4 @@
+<?php
 /*
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -14,3 +15,12 @@
  *      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  *      MA 02110-1301, USA.
  */
+
+	session_start();
+	if(!isset($_SESSION['player'])){
+		$_SESSION['player']='player';
+		$_SESSION['y']=7;
+		$_SESSION['x']=12;
+		$_SESSION['totalEnemy']=10;
+	}
+?>
