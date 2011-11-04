@@ -16,10 +16,6 @@
  *      MA 02110-1301, USA.
  */
 
-/*
- * $events = array($y => array($x => $event))
- * $tilesPos = array($y => array($x => $tile))
- */
 	class Map {
 
 		private $width=0;
@@ -34,8 +30,8 @@
 
 
 		public function __construct($mapName){
-			if(file_exists(self::MAPDIR.$mapName.'.txt')){
-				$map = fopen(self::MAPDIR.$mapName.'.txt','r');
+			if(file_exists(self::MAPDIR.$mapName.'.map')){
+				$map = fopen(self::MAPDIR.$mapName.'.map','r');
 				$numLine=0;
 				while(!feof($map)){
 					$line = fgets($map,128);
@@ -51,7 +47,7 @@
 			}
 		}
 
-		function drawMap(){
+		public function drawMap(){
 			echo '<div id="map" style="width:'.($this->viewPort['w']*32).'; height:'.($this->viewPort['h']*32).';">';
 			$xmin = $this->playerPos['x']-($this->viewPort['w']/2);
 			$xmax = $this->playerPos['x']+($this->viewPort['w']/2);
@@ -69,7 +65,6 @@
 			}
 			echo '<div id="player" style="top:'.($this->viewPort['h']/2*32-16).'; left:'.($this->viewPort['w']/2*32).';"><img src="./images/'.$_SESSION['player'].'.png"></div>';
 			echo '</div>';
-			//var_dump($_SESSION);
 		}
 
 		public function setPlayerPos($x,$y){

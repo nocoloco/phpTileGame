@@ -1,0 +1,15 @@
+$events = array($y => array($x => $event))
+$tilesPos = array($y => array($x => $tile))
+
+arquivos de mapa
+
+DIR maps/
+	*.map -> postion of tiles
+	*.evn -> postion of events
+
+
+TODO: implement a map editor and modify the class map for this structure
+layer 0 - ground -> chao, agua, calçadas, terra, grama
+layer 1 - objects -> player, npcs e objetos interativos
+layer 2 - top -> camada aerea ou objetos que ficam acima do player
+layer 3 - collision -> para detecçao de colisao

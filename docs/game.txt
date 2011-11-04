@@ -1,0 +1,28 @@
+Informacoes armazenadas na sessao
+
+- Player
+	nome
+		-> (string)
+	classe
+		-> (string)
+	mapa corrente
+		-> map (string)
+	posicao corrente no mapa
+		-> x (int)
+		-> y (int)
+	status
+		-> lvl
+		-> exp current/exp to up
+		-> life current/max
+		-> mana current/max
+		-> strength
+		-> dexterity
+		-> wisdom
+	skills
+
+	enemys ??
+
+- Opcoes do jogo
+	viewPort
+		-> width (int)
+		-> height (int)

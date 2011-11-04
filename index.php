@@ -30,6 +30,18 @@
 					function(data){
 						$('#drawMap').html(data);
 				});
+				updateStatusPlayer();
+			}
+			function updateStatusPlayer(){
+				$.post("status.php", function(data){
+					$('#status').html(data);
+				});
+			}
+			function setOptions(w,h){
+				$.post("options.php", { width: w, height: h },
+					function(data){
+						updateMap('center');
+				});
 			}
 		</script>
 		<style>
@@ -43,12 +55,41 @@
 	<body>
 		<div id="drawMap"></div>
 		<div id="nav">
-			<div style="margin-left: 12px;"><a href="javascript:void(0);" onclick="updateMap('north');"><img alt="North" src="images/up.png"></a></div>
-			<div>
-				<a style="margin-left: -8px;" href="javascript:void(0);" onclick="updateMap('west');"><img alt="West" src="images/left.png"></a>
-				<a style="margin-left: 14px;" href="javascript:void(0);" onclick="updateMap('east');"><img alt="East" src="images/right.png"></a>
-			</div>
-			<div style="margin-top:-5px; margin-left: 12px;"><a href="javascript:void(0);" onclick="updateMap('south');"><img alt="South" src="images/down.png"></a></div>
+			<table border="1" align="center">
+				<tr>
+					<td>Navegacao</td>
+					<td>Informacoes</td>
+					<td>Opcoes</td>
+				</tr>
+				<tr>
+					<td>
+						<table align="center" valign="middle">
+							<tr>
+								<td></td>
+								<td align="center" valign="middle"><a href="javascript:void(0);" onclick="updateMap('north');"><img alt="North" src="images/up.png"></a></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td align="center" valign="middle"><a href="javascript:void(0);" onclick="updateMap('west');"><img alt="West" src="images/left.png"></a></td>
+								<td></td>
+								<td align="center" valign="middle"><a href="javascript:void(0);" onclick="updateMap('east');"><img alt="East" src="images/right.png"></a></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td align="center" valign="middle"><a href="javascript:void(0);" onclick="updateMap('south');"><img alt="South" src="images/down.png"></a></td>
+								<td></td>
+							</tr>
+						</table>
+					</td>
+					<td>
+						<div id="status"></div>
+					</td>
+					<td>
+						<input type="button" onclick="setOptions(16,12);" value="16x12"><br>
+						<input type="button" onclick="setOptions(22,18);" value="22x18">
+					</td>
+				</tr>
+			</table>
 		</div>
 	</body>
 </html>

@@ -17,31 +17,11 @@
  */
 
 	include('session.php');
-	include('class/map.php');
 
-	$map = new Map('map01');
-
-	if(isset($_POST['position'])){
-		switch($_POST['position']){
-			case 'north':{
-				$_SESSION['y'] -= 1;
-				break;
-			}
-			case 'south':{
-				$_SESSION['y'] += 1;
-				break;
-			}
-			case 'west':{
-				$_SESSION['x'] -= 1;
-				break;
-			}
-			case 'east':{
-				$_SESSION['x'] += 1;
-				break;
-			}
-		}
+	if(isset($_POST['width'])){
+		$_SESSION['w']=(int)$_POST['width'];
 	}
-	$map->setPlayerPos($_SESSION['x'],$_SESSION['y']);
-	$map->setViewPort($_SESSION['w'],$_SESSION['h']);
-	$map->drawMap();
+	if(isset($_POST['height'])){
+		$_SESSION['h']=(int)$_POST['height'];
+	}
 ?>
