@@ -29,7 +29,7 @@
 		private $lvl;
 		private $class;
 
-		public __construct(){
+		public function __construct(){
 
 		}
 
