@@ -3,6 +3,8 @@ Informacoes armazenadas na sessao
 - Player
 	nome
 		-> (string)
+		-> char (string)
+		-> tile (string)
 	classe
 		-> (string)
 	mapa corrente

@@ -13,3 +13,11 @@ layer 0 - ground -> chao, agua, calçadas, terra, grama
 layer 1 - objects -> player, npcs e objetos interativos
 layer 2 - top -> camada aerea ou objetos que ficam acima do player
 layer 3 - collision -> para detecçao de colisao
+
+
+
+events
+	-> collision
+		-> b: bloqued
+	-> portals
+		-> p:{mapTo,posX,posY}

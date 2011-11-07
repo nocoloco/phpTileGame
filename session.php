@@ -22,7 +22,8 @@
 
 	session_start();
 	if(!isset($_SESSION['player'])){
-		$_SESSION['player']='player';
+		$_SESSION['player']='char1';
+		$_SESSION['tile']='down';
 		$_SESSION['y']=7;
 		$_SESSION['x']=12;
 		$_SESSION['w']=16;

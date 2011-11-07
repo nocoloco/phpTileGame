@@ -21,27 +21,76 @@
 
 	$map = new Map('map01');
 
-	if(isset($_POST['position'])){
-		switch($_POST['position']){
-			case 'north':{
-				$_SESSION['y'] -= 1;
-				break;
-			}
-			case 'south':{
-				$_SESSION['y'] += 1;
-				break;
-			}
-			case 'west':{
-				$_SESSION['x'] -= 1;
-				break;
-			}
-			case 'east':{
-				$_SESSION['x'] += 1;
-				break;
-			}
-		}
-	}
+	updatePlayerPos($map);
+
 	$map->setPlayerPos($_SESSION['x'],$_SESSION['y']);
 	$map->setViewPort($_SESSION['w'],$_SESSION['h']);
 	$map->drawMap();
+
+	function updatePlayerPos(&$map){
+		// get the current position
+		$x = $newX = $_SESSION['x'];
+		$y = $newY = $_SESSION['y'];
+
+		if(isset($_POST['position'])){
+			switch($_POST['position']){
+				case 'north':{
+					$newY--;
+					$_SESSION['tile'] = 'up';
+					break;
+				}
+				case 'south':{
+					$newY++;
+					$_SESSION['tile'] = 'down';
+					break;
+				}
+				case 'west':{
+					$newX--;
+					$_SESSION['tile'] = 'left';
+					break;
+				}
+				case 'east':{
+					$newX++;
+					$_SESSION['tile'] = 'right';
+					break;
+				}
+			}
+		}
+
+		if(existNewPosition($map,$newY,$newX)){
+			$events = existEvents($map,$newY,$newX);
+			if($events){
+				if($events !== 'b'){
+					$y = $newY;
+					$x = $newX;
+				}
+			}
+			else{
+				$y = $newY;
+				$x = $newX;
+			}
+		}
+
+		// update session position
+		$_SESSION['x'] = $x;
+		$_SESSION['y'] = $y;
+	}
+
+	function existNewPosition(&$map,$y,$x){
+		$mapLimits = $map->getTilesPos();
+		if(isset($mapLimits[$y][$x])){
+			return true;
+		}
+		return false;
+	}
+
+	function existEvents(&$map,$y,$x){
+		$events = $map->getEventsPos();
+		if(isset($events[$y][$x])){
+			return $events[$y][$x];
+		}
+		return false;
+	}
+
+
 ?>
